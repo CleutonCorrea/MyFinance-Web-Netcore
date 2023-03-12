@@ -1,0 +1,71 @@
+@model TransactionsReportModel
+@{
+    ViewData["Title"] = "Relatório de transações por período";
+
+    var receitas = ViewBag.ReceitasBag;
+    var despesas = ViewBag.DespesasBag;
+
+    string vStartDate = string.Empty;
+    string vEndDate = string.Empty;
+
+    if (Model.StartDate != null)
+    {
+        vStartDate = DateTime.Parse(Model.StartDate.ToString()).ToString("yyyy-MM-dd");
+    }
+
+    if (Model.EndDate != null)
+    {
+        vEndDate = DateTime.Parse(Model.EndDate.ToString()).ToString("yyyy-MM-dd");
+    }
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<hr>
+
+<form asp-controller="Transaction" asp-action="Reports">
+    <div class="form-group">
+        <label>Data inicial:</label>
+        <input type="date" class="form-control" asp-for="StartDate" value="@vStartDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+        <label>Data final:</label>
+        <input type="date" class="form-control" asp-for="EndDate" value="@vEndDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-block btn-success">Filtrar</button>
+    <td><button type="button" class="btn btn-block btn-warning" onclick="LoadDraft(@receitas, @despesas);">Gerar
+            Gráfico</button></td>
+</form>
+
+<hr>
+
+
+<div class="container d-flex justify-content-center align-items-center"><div id="piechart" style="width: 900px; height: 500px;"></div>
+
+    <!-- Load the Google Charts API -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Transação', 'Total'],
+      ['Receita', @Model.CountIncomeTransactions],
+      ['Despesa', @Model.CountExpensesTransactions]
+    ]);
+
+    var options = {
+      title: 'Despesas x Receitas',
+      colors: ['#198754', '#DC3545'],
+      is3D: true,
+      pieSliceText: 'value-and-percentage'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+</script>
