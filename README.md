@@ -17,13 +17,13 @@ O projeto utiliza as tecnologias:
 
 Para o projeto utilizamos o banco de dados relacional SQL Server, seguindo a modelagem de dados apresentada:
 
-<img src="\docs\MF_DER.png" alt="DER">
+
 
 ## 💻 Arquitetura
 
 O projeto foi divido em camadas, seguindo boas práticas de arquitetura, conforme desenho:
 
-<img src="\docs\MF_Arquitetura.png" alt="Arquitetura">
+
 
 ## 💻 Premissas
 
@@ -53,20 +53,19 @@ Para executar o projeto:
 
 Nessa tela conseguimos criar, alterar, deletar e visualizar os planos de contas, informando uma descrição e o tipo (Receita ou Despesa):
 
-<img src="\docs\T_PlanoConta.png" alt="Plano de Conta">
+
 
 - Tela de Transações
 
 Nessa tela conseguimos criar, alterar, deletar e visualizar transações financeiras, informando a data, valor, histórico e selecionando qual o plano de conta relacionado a transação, além de podermos navegar para a tela de relatório:
 
-<img src="\docs\T_Transacoes.png" alt="Transacao">
+
 
 - Tela de Relatório
 
 Nessa tela conseguimos gerar um relatório por período, selecionando o intervalo de datas que desejamos pesquisar e clicando em filtrar:
 
-<img src="\docs\T_Reports.png" alt="Relatorio">
+
 
 Com o relatório gerado conseguimos em sequência gerar um gráfico clicando em "Gerar Gráfico" comparando as receitas e despesas do período:
 
-<img src="\docs\T_ReportsChart.png" alt="Grafico">
